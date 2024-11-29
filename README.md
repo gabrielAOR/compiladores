@@ -2,129 +2,128 @@
 
 ---
 
-### **Descrição do Projeto**
-
-Este projeto implementa um interpretador gráfico utilizando a biblioteca **Turtle** do Python e o **ANTLR** para processar uma linguagem personalizada chamada **Desenhar**. A linguagem permite criar desenhos geométricos baseados em comandos simples, como mover, girar, alterar a cor e repetir blocos de comandos.
-
-Um exemplo incluído no projeto desenha a palavra **"compilar"** ao ser executado, ilustrando as capacidades da linguagem.
+### **Equipe**
+- **Gabriel Agra**  
+- **Gabriel Alves**
 
 ---
 
-### **Requisitos**
+### **Motivação**
 
-1. **Python 3.7+**
-2. **ANTLR 4**
-3. **Pacotes Python necessários:**
-   - `antlr4-python3-runtime`
-   - `turtle` (parte do Python por padrão)
+O projeto foi desenvolvido com o objetivo de explorar conceitos de linguagens de programação e compiladores. A linguagem **Desenhar** foi criada para ser simples e intuitiva, permitindo que usuários criem desenhos geométricos ou textos na tela utilizando comandos estruturados.  
+
+Além disso, este projeto demonstra a integração entre ferramentas como **ANTLR**, para criação de gramáticas e análise sintática, e a biblioteca gráfica **Turtle**, que fornece uma maneira divertida e visual de interpretar os comandos.
 
 ---
 
-### **Instalação**
+### **Descrição da Linguagem Desenhar**
 
-1. Clone o repositório:
+A linguagem **Desenhar** foi projetada para ser minimalista e funcional. Com ela, é possível mover uma "tartaruga gráfica" na tela, mudar sua direção, alterar a cor do traço, levantar ou abaixar a caneta para desenhar ou não, e repetir comandos em blocos.
+
+**Principais recursos da linguagem:**
+1. **Movimento**: Controle do deslocamento da tartaruga.
+2. **Direção**: Controle do ângulo de rotação.
+3. **Cores**: Alteração da cor da caneta.
+4. **Repetição**: Execução de blocos de comandos múltiplas vezes.
+
+**Exemplo de programa simples:**
+```txt
+COLOR RED;
+PENDOWN;
+REPEAT 4 {
+    MOVE 100;
+    TURN 90;
+}
+PENUP;
+```
+
+Neste exemplo, a tartaruga desenha um quadrado vermelho.
+
+---
+
+### **Guia de Execução**
+
+#### **Requisitos**
+1. **Python 3.7+** instalado no sistema.
+2. **ANTLR 4** instalado (para gerar os analisadores léxicos e sintáticos).
+3. Pacote Python:
+   ```bash
+   pip install antlr4-python3-runtime
+   ```
+
+#### **Passos para execução**
+
+1. **Clonar o projeto:**
    ```bash
    git clone https://github.com/seu-usuario/seu-repositorio.git
    cd seu-repositorio
    ```
 
-2. Instale o runtime do ANTLR para Python:
-   ```bash
-   pip install antlr4-python3-runtime
-   ```
-
-3. Gere os arquivos de análise léxica, sintática e o visitante com o seguinte comando:
+2. **Gerar arquivos do ANTLR:**
+   Execute o comando abaixo para gerar os arquivos do analisador léxico, sintático e visitante:
    ```bash
    antlr4 -Dlanguage=Python3 -visitor Desenhar.g4
    ```
 
-4. Certifique-se de que os seguintes arquivos foram gerados:
-   - `DesenharLexer.py`
-   - `DesenharParser.py`
-   - `DesenharVisitor.py`
+3. **Criar um arquivo de entrada:**
+   Crie um arquivo `.txt` contendo o código da linguagem **Desenhar**.
 
----
-
-### **Como Usar**
-
-1. **Criar um Arquivo de Entrada:**
-   Crie um arquivo `.txt` contendo os comandos da linguagem **Desenhar**. Por exemplo:
+   Exemplo (`entrada.txt`):
    ```txt
-   COLOR RED;
+   COLOR BLUE;
    PENDOWN;
+   MOVE 100;
+   TURN 90;
    REPEAT 4 {
-       MOVE 100;
-       TURN 90;
+       COLOR GREEN;
+       MOVE 50;
+       TURN 45;
    }
    PENUP;
-   MOVE 200;
    ```
 
-2. **Executar o Interpretador:**
-   Use o terminal para executar o interpretador com o arquivo de entrada como argumento:
+4. **Executar o interpretador:**
+   Use o seguinte comando para interpretar o programa:
    ```bash
-   python interpretador.py <nome-do-arquivo>
+   python interpretador.py entrada.txt
    ```
 
-3. Uma janela gráfica será aberta exibindo o desenho gerado.
-
 ---
 
-### **Comandos da Linguagem Desenhar**
+### **Exemplos de Programas**
 
-| Comando           | Descrição                                              | Exemplo                 |
-|--------------------|--------------------------------------------------------|-------------------------|
-| `MOVE <N>;`       | Move a tartaruga para frente por `<N>` unidades.        | `MOVE 100;`            |
-| `TURN <N>;`       | Gira a tartaruga `<N>` graus para a direita.            | `TURN 90;`             |
-| `PENDOWN;`        | Abaixa a caneta para começar a desenhar.                | `PENDOWN;`             |
-| `PENUP;`          | Levanta a caneta para parar de desenhar.                | `PENUP;`               |
-| `COLOR <COR>;`    | Muda a cor da caneta.                                   | `COLOR RED;`           |
-| `REPEAT <N> { ... }` | Repete um bloco de comandos `<N>` vezes.             | `REPEAT 4 { MOVE 50; TURN 90; }` |
-
-**Cores disponíveis:** `RED`, `GREEN`, `BLUE`, `BLACK`, `YELLOW`.
-
----
-
-### **Exemplo Completo**
-
-Arquivo `entrada.txt`:
+#### **Exemplo 1: Quadrado Vermelho**
 ```txt
-COLOR BLUE;
+COLOR RED;
 PENDOWN;
-MOVE 150;
-TURN 90;
-COLOR GREEN;
-MOVE 100;
-TURN 90;
 REPEAT 4 {
-    COLOR YELLOW;
-    MOVE 50;
-    TURN 45;
+    MOVE 100;
+    TURN 90;
 }
 PENUP;
-MOVE 200;
+```
+
+Saída: Um quadrado vermelho será desenhado.
+
+#### **Exemplo 2: Desenho de "compilar"**
+Arquivo `compilar.txt`:
+```txt
+COLOR BLACK;
+PENDOWN;
+MOVE 50;
+TURN 90;
+MOVE 100;
+PENUP;
+TURN 90;
+MOVE 50;
+...
 ```
 
 Comando:
 ```bash
-python interpretador.py entrada.txt
+python interpretador.py compilar.txt
 ```
 
-Saída: Um desenho será gerado seguindo as instruções do arquivo.
-
----
-
-### **Desenho de "compilar"**
-
-Um exemplo incluído no projeto desenha a palavra **"compilar"**. Para testá-lo:
-
-1. Localize o arquivo de entrada de exemplo no diretório `examples/compilar.txt`.
-
-2. Execute o interpretador com o comando:
-   ```bash
-   python interpretador.py examples/compilar.txt
-   ```
-
-3. Uma janela será aberta desenhando a palavra **"compilar"**.
+Saída: O desenho da palavra **"compilar"** aparecerá na janela gráfica.
 
 ---
