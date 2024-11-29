@@ -10,6 +10,13 @@ class TurtleInterpreter(DesenharVisitor):
         self.turtle = turtle.Turtle()
         self.screen = turtle.Screen()
 
+        left_edge_x = -self.screen.window_width() / 2
+        desired_x = left_edge_x + 100
+
+        self.turtle.penup()
+        self.turtle.goto(desired_x, 0)
+        self.turtle.pendown()
+
     def visitProgram(self, ctx):
         for stmt in ctx.statement():
             self.visit(stmt)
